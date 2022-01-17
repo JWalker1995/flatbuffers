@@ -12,25 +12,25 @@ export enum Gadget{
 
 export function unionToGadget(
   type: Gadget,
-  accessor: (obj:FallingTub|HandFan) => FallingTub|HandFan|null
+  accessor: (Type: { new (): FallingTub|HandFan }) => FallingTub|HandFan|null
 ): FallingTub|HandFan|null {
-  switch(Gadget[type]) {
-    case 'NONE': return null; 
-    case 'FallingTub': return accessor(new FallingTub())! as FallingTub;
-    case 'HandFan': return accessor(new HandFan())! as HandFan;
+  switch(type) {
+    case Gadget.NONE: return null; 
+    case Gadget.FallingTub: return accessor(FallingTub);
+    case Gadget.HandFan: return accessor(HandFan);
     default: return null;
   }
 }
 
 export function unionListToGadget(
   type: Gadget, 
-  accessor: (index: number, obj:FallingTub|HandFan) => FallingTub|HandFan|null, 
+  accessor: (index: number, Type: { new (): FallingTub|HandFan }) => FallingTub|HandFan|null, 
   index: number
 ): FallingTub|HandFan|null {
-  switch(Gadget[type]) {
-    case 'NONE': return null; 
-    case 'FallingTub': return accessor(index, new FallingTub())! as FallingTub;
-    case 'HandFan': return accessor(index, new HandFan())! as HandFan;
+  switch(type) {
+    case Gadget.NONE: return null; 
+    case Gadget.FallingTub: return accessor(index, FallingTub);
+    case Gadget.HandFan: return accessor(index, HandFan);
     default: return null;
   }
 }

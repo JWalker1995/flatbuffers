@@ -14,27 +14,27 @@ export enum Any{
 
 export function unionToAny(
   type: Any,
-  accessor: (obj:Monster|MyGameExample2Monster|TestSimpleTableWithEnum) => Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null
+  accessor: (Type: { new (): Monster|MyGameExample2Monster|TestSimpleTableWithEnum }) => Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null
 ): Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null {
-  switch(Any[type]) {
-    case 'NONE': return null; 
-    case 'Monster': return accessor(new Monster())! as Monster;
-    case 'TestSimpleTableWithEnum': return accessor(new TestSimpleTableWithEnum())! as TestSimpleTableWithEnum;
-    case 'MyGame_Example2_Monster': return accessor(new MyGameExample2Monster())! as MyGameExample2Monster;
+  switch(type) {
+    case Any.NONE: return null; 
+    case Any.Monster: return accessor(Monster);
+    case Any.TestSimpleTableWithEnum: return accessor(TestSimpleTableWithEnum);
+    case Any.MyGame_Example2_Monster: return accessor(MyGameExample2Monster);
     default: return null;
   }
 }
 
 export function unionListToAny(
   type: Any, 
-  accessor: (index: number, obj:Monster|MyGameExample2Monster|TestSimpleTableWithEnum) => Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null, 
+  accessor: (index: number, Type: { new (): Monster|MyGameExample2Monster|TestSimpleTableWithEnum }) => Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null, 
   index: number
 ): Monster|MyGameExample2Monster|TestSimpleTableWithEnum|null {
-  switch(Any[type]) {
-    case 'NONE': return null; 
-    case 'Monster': return accessor(index, new Monster())! as Monster;
-    case 'TestSimpleTableWithEnum': return accessor(index, new TestSimpleTableWithEnum())! as TestSimpleTableWithEnum;
-    case 'MyGame_Example2_Monster': return accessor(index, new MyGameExample2Monster())! as MyGameExample2Monster;
+  switch(type) {
+    case Any.NONE: return null; 
+    case Any.Monster: return accessor(index, Monster);
+    case Any.TestSimpleTableWithEnum: return accessor(index, TestSimpleTableWithEnum);
+    case Any.MyGame_Example2_Monster: return accessor(index, MyGameExample2Monster);
     default: return null;
   }
 }

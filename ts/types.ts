@@ -4,7 +4,7 @@ import { Builder } from './builder.ts';
 export type Offset = number;
 
 export type Table = {
-  bb: ByteBuffer
+  bb: ByteBuffer | null
   bb_pos: number
 };
 

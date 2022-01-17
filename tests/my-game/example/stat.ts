@@ -23,7 +23,7 @@ static getSizePrefixedRootAsStat(bb:flatbuffers.ByteBuffer, obj?:Stat):Stat {
 }
 
 id():string|null
-id(optionalEncoding:flatbuffers.Encoding):string|Uint8Array|null
+id(optionalEncoding:typeof flatbuffers.Encoding):string|Uint8Array|null
 id(optionalEncoding?:any):string|Uint8Array|null {
   const offset = this.bb!.__offset(this.bb_pos, 4);
   return offset ? this.bb!.__string(this.bb_pos + offset, optionalEncoding) : null;

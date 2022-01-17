@@ -35,9 +35,9 @@ mainCharacterType():Character {
   return offset ? this.bb!.readUint8(this.bb_pos + offset) : Character.NONE;
 }
 
-mainCharacter<T extends flatbuffers.Table>(obj:any|string):any|string|null {
+mainCharacter<T extends flatbuffers.Table>(Type: { new (): T }): T|null {
   const offset = this.bb!.__offset(this.bb_pos, 6);
-  return offset ? this.bb!.__union_with_string(obj, this.bb_pos + offset) : null;
+  return offset ? this.bb!.__union_with_string(new Type(), this.bb_pos + offset) : null;
 }
 
 charactersType(index: number):Character|null {

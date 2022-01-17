@@ -12,27 +12,27 @@ export enum AnyAmbiguousAliases{
 
 export function unionToAnyAmbiguousAliases(
   type: AnyAmbiguousAliases,
-  accessor: (obj:Monster) => Monster|null
+  accessor: (Type: { new (): Monster }) => Monster|null
 ): Monster|null {
-  switch(AnyAmbiguousAliases[type]) {
-    case 'NONE': return null; 
-    case 'M1': return accessor(new Monster())! as Monster;
-    case 'M2': return accessor(new Monster())! as Monster;
-    case 'M3': return accessor(new Monster())! as Monster;
+  switch(type) {
+    case AnyAmbiguousAliases.NONE: return null; 
+    case AnyAmbiguousAliases.M1: return accessor(Monster);
+    case AnyAmbiguousAliases.M2: return accessor(Monster);
+    case AnyAmbiguousAliases.M3: return accessor(Monster);
     default: return null;
   }
 }
 
 export function unionListToAnyAmbiguousAliases(
   type: AnyAmbiguousAliases, 
-  accessor: (index: number, obj:Monster) => Monster|null, 
+  accessor: (index: number, Type: { new (): Monster }) => Monster|null, 
   index: number
 ): Monster|null {
-  switch(AnyAmbiguousAliases[type]) {
-    case 'NONE': return null; 
-    case 'M1': return accessor(index, new Monster())! as Monster;
-    case 'M2': return accessor(index, new Monster())! as Monster;
-    case 'M3': return accessor(index, new Monster())! as Monster;
+  switch(type) {
+    case AnyAmbiguousAliases.NONE: return null; 
+    case AnyAmbiguousAliases.M1: return accessor(index, Monster);
+    case AnyAmbiguousAliases.M2: return accessor(index, Monster);
+    case AnyAmbiguousAliases.M3: return accessor(index, Monster);
     default: return null;
   }
 }

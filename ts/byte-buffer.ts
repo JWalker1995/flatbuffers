@@ -177,7 +177,7 @@ export class ByteBuffer {
     /**
      * Initialize any Table-derived type to point to the union at the given offset.
      */
-    __union(t: Table, offset: number): Table {
+    __union<T extends Table>(t: T, offset: number): T {
       t.bb_pos = offset + this.readInt32(offset);
       t.bb = this;
       return t;

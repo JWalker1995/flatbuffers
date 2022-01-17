@@ -697,30 +697,29 @@ class TsGenerator : public BaseGenerator {
 
       auto ret = "\n\nexport function " + GenUnionConvFuncName(enum_def) +
                  "(\n  type: " + enum_def.name +
-                 ",\n  accessor: (obj:" + valid_union_type + ") => " +
+                 ",\n  accessor: (Type: { new (): " + valid_union_type + " }) => " +
                  valid_union_type_with_null +
                  "\n): " + valid_union_type_with_null + " {\n";
 
       const auto enum_type = AddImport(imports, enum_def, enum_def);
 
       const auto union_enum_loop = [&](const std::string &accessor_str) {
-        ret += "  switch(" + enum_type + "[type]) {\n";
-        ret += "    case 'NONE': return null; \n";
+        ret += "  switch(type) {\n";
+        ret += "    case " + enum_type + ".NONE: return null; \n";
 
         for (auto it = enum_def.Vals().begin(); it != enum_def.Vals().end();
              ++it) {
           const auto &ev = **it;
           if (ev.IsZero()) { continue; }
 
-          ret += "    case '" + ev.name + "': ";
+          ret += "    case " + enum_type + "." + ev.name + ": ";
 
           if (IsString(ev.union_type)) {
             ret += "return " + accessor_str + "'') as string;";
           } else if (ev.union_type.base_type == BASE_TYPE_STRUCT) {
             const auto type =
                 AddImport(imports, enum_def, *ev.union_type.struct_def);
-            ret += "return " + accessor_str + "new " + type + "())! as " +
-                   type + ";";
+            ret += "return " + accessor_str + type + ");";
           } else {
             FLATBUFFERS_ASSERT(false);
           }
@@ -736,8 +735,7 @@ class TsGenerator : public BaseGenerator {
 
       ret += "\n\nexport function " + GenUnionListConvFuncName(enum_def) +
              "(\n  type: " + enum_def.name +
-             ", \n  accessor: (index: number, obj:" + valid_union_type +
-             ") => " + valid_union_type_with_null +
+             ", \n  accessor: (index: number, Type: { new (): " + valid_union_type + " }) => " + valid_union_type_with_null +
              ", \n  index: number\n): " + valid_union_type_with_null + " {\n";
       union_enum_loop("accessor(index, ");
       ret += "}";
@@ -1198,7 +1196,7 @@ class TsGenerator : public BaseGenerator {
         if (is_string) {
           code += prefix + "):string|null\n";
           code +=
-              prefix + "optionalEncoding:flatbuffers.Encoding" + "):" +
+              prefix + "optionalEncoding:typeof flatbuffers.Encoding" + "):" +
               GenTypeName(imports, struct_def, field.value.type, false, true) +
               "\n";
           code += prefix + "optionalEncoding?:any";
@@ -1295,7 +1293,7 @@ class TsGenerator : public BaseGenerator {
               code += prefix + ", obj?:" + vectortypename;
             } else if (IsString(vectortype)) {
               code += prefix + "):string\n";
-              code += prefix + ",optionalEncoding:flatbuffers.Encoding" +
+              code += prefix + ",optionalEncoding:typeof flatbuffers.Encoding" +
                       "):" + vectortypename + "\n";
               code += prefix + ",optionalEncoding?:any";
             } else {
@@ -1344,13 +1342,11 @@ class TsGenerator : public BaseGenerator {
 
             const auto &union_enum = *(field.value.type.enum_def);
             const auto union_type = GenUnionGenericTypeTS(union_enum);
-            code += "<T extends flatbuffers.Table>(obj:" + union_type +
-                    "):" + union_type +
-                    "|null "
+            code += "<T extends flatbuffers.Table>(Type: { new (): T }): T|null "
                     "{\n";
 
             code += offset_prefix +
-                    GenGetter(field.value.type, "(obj, this.bb_pos + offset)") +
+                    GenGetter(field.value.type, "(new Type(), this.bb_pos + offset)") +
                     " : null;\n";
             break;
           }

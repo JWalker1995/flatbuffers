@@ -80,7 +80,7 @@ mutate_hp(value:number):boolean {
 }
 
 name():string|null
-name(optionalEncoding:flatbuffers.Encoding):string|Uint8Array|null
+name(optionalEncoding:typeof flatbuffers.Encoding):string|Uint8Array|null
 name(optionalEncoding?:any):string|Uint8Array|null {
   const offset = this.bb!.__offset(this.bb_pos, 10);
   return offset ? this.bb!.__string(this.bb_pos + offset, optionalEncoding) : null;
@@ -122,9 +122,9 @@ testType():Any {
   return offset ? this.bb!.readUint8(this.bb_pos + offset) : Any.NONE;
 }
 
-test<T extends flatbuffers.Table>(obj:any):any|null {
+test<T extends flatbuffers.Table>(Type: { new (): T }): T|null {
   const offset = this.bb!.__offset(this.bb_pos, 20);
-  return offset ? this.bb!.__union(obj, this.bb_pos + offset) : null;
+  return offset ? this.bb!.__union(new Type(), this.bb_pos + offset) : null;
 }
 
 test4(index: number, obj?:Test):Test|null {
@@ -138,7 +138,7 @@ test4Length():number {
 }
 
 testarrayofstring(index: number):string
-testarrayofstring(index: number,optionalEncoding:flatbuffers.Encoding):string|Uint8Array
+testarrayofstring(index: number,optionalEncoding:typeof flatbuffers.Encoding):string|Uint8Array
 testarrayofstring(index: number,optionalEncoding?:any):string|Uint8Array|null {
   const offset = this.bb!.__offset(this.bb_pos, 24);
   return offset ? this.bb!.__string(this.bb!.__vector(this.bb_pos + offset) + index * 4, optionalEncoding) : null;
@@ -396,7 +396,7 @@ mutate_testf3(value:number):boolean {
 }
 
 testarrayofstring2(index: number):string
-testarrayofstring2(index: number,optionalEncoding:flatbuffers.Encoding):string|Uint8Array
+testarrayofstring2(index: number,optionalEncoding:typeof flatbuffers.Encoding):string|Uint8Array
 testarrayofstring2(index: number,optionalEncoding?:any):string|Uint8Array|null {
   const offset = this.bb!.__offset(this.bb_pos, 60);
   return offset ? this.bb!.__string(this.bb!.__vector(this.bb_pos + offset) + index * 4, optionalEncoding) : null;
@@ -575,9 +575,9 @@ anyUniqueType():AnyUniqueAliases {
   return offset ? this.bb!.readUint8(this.bb_pos + offset) : AnyUniqueAliases.NONE;
 }
 
-anyUnique<T extends flatbuffers.Table>(obj:any):any|null {
+anyUnique<T extends flatbuffers.Table>(Type: { new (): T }): T|null {
   const offset = this.bb!.__offset(this.bb_pos, 92);
-  return offset ? this.bb!.__union(obj, this.bb_pos + offset) : null;
+  return offset ? this.bb!.__union(new Type(), this.bb_pos + offset) : null;
 }
 
 anyAmbiguousType():AnyAmbiguousAliases {
@@ -585,9 +585,9 @@ anyAmbiguousType():AnyAmbiguousAliases {
   return offset ? this.bb!.readUint8(this.bb_pos + offset) : AnyAmbiguousAliases.NONE;
 }
 
-anyAmbiguous<T extends flatbuffers.Table>(obj:any):any|null {
+anyAmbiguous<T extends flatbuffers.Table>(Type: { new (): T }): T|null {
   const offset = this.bb!.__offset(this.bb_pos, 96);
-  return offset ? this.bb!.__union(obj, this.bb_pos + offset) : null;
+  return offset ? this.bb!.__union(new Type(), this.bb_pos + offset) : null;
 }
 
 vectorOfEnums(index: number):Color|null {
