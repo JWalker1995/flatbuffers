@@ -1,9 +1,9 @@
-import { BitWidth } from './bit-width'
-import { paddingSize, iwidth, uwidth, fwidth, toByteWidth, fromByteWidth } from './bit-width-util'
-import { toUTF8Array } from './flexbuffers-util'
-import { ValueType } from './value-type'
-import { isNumber, isTypedVectorElement, toTypedVector } from './value-type-util'
-import { StackValue } from './stack-value'
+import { BitWidth } from './bit-width.ts';
+import { paddingSize, iwidth, uwidth, fwidth, toByteWidth, fromByteWidth } from './bit-width-util.ts';
+import { toUTF8Array } from './flexbuffers-util.ts';
+import { ValueType } from './value-type.ts';
+import { isNumber, isTypedVectorElement, toTypedVector } from './value-type-util.ts';
+import { StackValue } from './stack-value.ts';
 
 interface StackPointer {
   stackPosition: number,

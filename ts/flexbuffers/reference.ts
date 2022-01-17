@@ -1,9 +1,9 @@
-import { fromByteWidth } from './bit-width-util'
-import { ValueType } from './value-type'
-import { isNumber, isIndirectNumber, isAVector, fixedTypedVectorElementSize, isFixedTypedVector, isTypedVector, typedVectorElementType, packedType, fixedTypedVectorElementType } from './value-type-util'
-import { indirect, keyForIndex, keyIndex, readFloat, readInt, readUInt, valueForIndexWithKey } from './reference-util'
-import { fromUTF8Array } from './flexbuffers-util';
-import { BitWidth } from './bit-width';
+import { fromByteWidth } from './bit-width-util.ts';
+import { ValueType } from './value-type.ts';
+import { isNumber, isIndirectNumber, isAVector, fixedTypedVectorElementSize, isFixedTypedVector, isTypedVector, typedVectorElementType, packedType, fixedTypedVectorElementType } from './value-type-util.ts';
+import { indirect, keyForIndex, keyIndex, readFloat, readInt, readUInt, valueForIndexWithKey } from './reference-util.ts';
+import { fromUTF8Array } from './flexbuffers-util.ts';
+import { BitWidth } from './bit-width.ts';
 
 export function toReference(buffer: ArrayBuffer): Reference {
   const len = buffer.byteLength;

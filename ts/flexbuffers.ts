@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Builder } from './flexbuffers/builder'
-import { toReference } from './flexbuffers/reference'
-export { toReference } from './flexbuffers/reference'
+import { Builder } from './flexbuffers/builder.ts';
+import { toReference } from './flexbuffers/reference.ts';
+export { toReference } from './flexbuffers/reference.ts';
 
 export function builder(): Builder {
     return new Builder();

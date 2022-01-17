@@ -1,5 +1,5 @@
-import { ByteBuffer } from './byte-buffer'
-import { Builder } from './builder'
+import { ByteBuffer } from './byte-buffer.ts';
+import { Builder } from './builder.ts';
 
 export type Offset = number;
 

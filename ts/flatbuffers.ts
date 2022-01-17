@@ -1,12 +1,12 @@
-export { SIZEOF_SHORT } from './constants'
-export { SIZEOF_INT } from './constants'
-export { FILE_IDENTIFIER_LENGTH } from './constants'
-export { SIZE_PREFIX_LENGTH } from './constants'
+export { SIZEOF_SHORT } from './constants.ts';
+export { SIZEOF_INT } from './constants.ts';
+export { FILE_IDENTIFIER_LENGTH } from './constants.ts';
+export { SIZE_PREFIX_LENGTH } from './constants.ts';
 
-export { Table, Offset } from './types'
+export type { Table, Offset } from './types.ts';
 
-export { int32, float32, float64, isLittleEndian } from './utils'
+export { int32, float32, float64, isLittleEndian } from './utils.ts';
 
-export { Encoding } from './encoding'
-export { Builder } from './builder'
-export { ByteBuffer } from './byte-buffer'
+export { Encoding } from './encoding.ts';
+export { Builder } from './builder.ts';
+export { ByteBuffer } from './byte-buffer.ts';
